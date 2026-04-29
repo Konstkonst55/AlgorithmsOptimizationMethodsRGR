@@ -1,10 +1,27 @@
-﻿namespace AlgorithmsOptimizationMethodsRGR
+﻿using System;
+using System.IO;
+
+namespace AlgorithmsOptimizationMethodsRGR
 {
-    internal class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            try
+            {
+                string filePath = "../../../input_inf_solutions.txt";
+                LinearProgram lp = new LinearProgram(filePath);
+                DualSimplexSolver solver = new DualSimplexSolver(lp);
+                solver.Solve();
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Произошла непредвиденная ошибка: {ex.Message}");
+            }
         }
     }
 }
